@@ -1,0 +1,6 @@
+/src/config
+package-lock.json
+/coverage
+/build
+/.vscode
+/node_modules
