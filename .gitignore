@@ -1,6 +1,10 @@
-/src/config
-package-lock.json
+# Directories
 /coverage
 /build
 /.vscode
 /node_modules
+/logs
+
+# Individual file
+.env
+package-lock.json

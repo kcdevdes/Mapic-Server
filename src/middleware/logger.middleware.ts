@@ -1,7 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import logger from "../logger";
 
-const loggerMiddleware = (req: Request, resp: Response, next: Function) => {
-	console.log("Request logged:", req.method, req.path);
+const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
+	const logMessage = {
+		address: req.ip,
+		url: req.url,
+		header: req.headers,
+		body: req.body,
+	};
+	logger.info(logMessage);
+
 	next();
 };
 

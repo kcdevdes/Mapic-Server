@@ -1,19 +1,19 @@
 import { Schema, model, connect, Types } from "mongoose";
 import bcrypt from "bcryptjs";
 
-// interface representing a document in MONGODB
+// interface representing a document
 export interface IUser {
 	email: string;
 	userId: string;
 	displayName: string;
 	password: string;
+	emailValid: boolean;
 	avatar?: string;
-	followers: Types.ObjectId[];
-	following: Types.ObjectId[];
-	bio: string;
-	website: string;
-	posts: Types.ObjectId[];
-	collections: Types.ObjectId[];
+	followers?: Types.ObjectId[];
+	following?: Types.ObjectId[];
+	bio?: string;
+	posts?: Types.ObjectId[];
+	collections?: Types.ObjectId[];
 	createdAt: Date;
 }
 
@@ -34,13 +34,13 @@ export const userSchema = new Schema<IUser>({
 	},
 	displayName: { type: String, required: true },
 	password: { type: String, required: true, minlength: 6 },
-	avatar: { type: String, required: true, default: "" },
-	followers: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
-	following: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
-	bio: { type: String, required: true },
-	website: { type: String, required: true },
-	posts: [{ type: Schema.Types.ObjectId, ref: "Post", required: true }],
-	collections: [{ type: Schema.Types.ObjectId, ref: "Post", required: true }],
+	avatar: { type: String, default: "" },
+	emailValid: { type: Boolean, default: false },
+	followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+	following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+	bio: { type: String },
+	posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+	collections: [{ type: Schema.Types.ObjectId, ref: "Post" }],
 	createdAt: { type: Date, required: true, default: Date.now },
 });
 

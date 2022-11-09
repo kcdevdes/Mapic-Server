@@ -1,8 +1,9 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import App from "../../app";
-import HomeController from "../../controller/home.controller";
-import loggerMiddleware from "../../middleware/logger.middleware";
+import loggerMiddleware from "../../logger";
+import AuthController from "../../controller/auth.controller";
+import config from "../../config/config";
 // import Environment from '../../src/environments/environment';
 // import logger from '../../middleware/logger';
 
@@ -15,8 +16,8 @@ export default class IntegrationHelpers {
 		}
 
 		const app = new App({
-			port: 3000,
-			controllers: [new HomeController()],
+			port: config.port!,
+			controllers: [new AuthController()],
 			middleWares: [
 				bodyParser.json(),
 				bodyParser.urlencoded({ extended: true }),
