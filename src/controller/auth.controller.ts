@@ -22,19 +22,41 @@ class AuthController implements IControllerBase {
 		this.router.get("/login", this.login);
 	}
 
+	/**
+	 * Register a new user
+	 * @param req 
+	 * @param res 
+	 */
 	register = async (req: Request, res: Response) => {
-		const userForm: IUser = {
-			email: "example@example.com",
-			userId: "admin",
-			displayName: "ADMINISTRATOR",
-			password: "secretpassword",
-			emailValid: false,
-			createdAt: new Date(),
-		};
-		const result = await this.authService.register(userForm);
-		res.status(http_status_code.OK).json(result);
+		let result: any;
+		try {
+			const userForm: IUser = {
+				email: req.body.email,
+				userId: req.body.userId,
+				displayName: req.body.displayName,
+				password: req.body.password,
+				emailValid: false,
+				createdAt: new Date(),
+			};
+			result = await this.authService.register(userForm);
+			res.status(http_status_code.OK).json(result);
+		} catch (error) {
+			result = {
+				message: "error",
+				statusCode: http_status_code.NOT_ACCEPTABLE,
+			};
+			res.status(http_status_code.NOT_ACCEPTABLE).json(result);
+		}
 	};
-	login = (req: Request, res: Response) => {};
+
+	/**
+	 * Attempts to log in and returns a JWT token if it succeeds.
+	 * @param req 
+	 * @param res 
+	 */
+	login = (req: Request, res: Response) => {
+		
+	};
 }
 
 export default AuthController;

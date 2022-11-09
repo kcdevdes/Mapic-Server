@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import App from "../../app";
-import loggerMiddleware from "../../logger";
+import loggerMiddleware from "../../util/logger";
 import AuthController from "../../controller/auth.controller";
 import config from "../../config/config";
 // import Environment from '../../src/environments/environment';

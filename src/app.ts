@@ -1,7 +1,7 @@
 import * as express from "express";
 import { Application } from "express";
 import IControllerBase from "./interface/controller_base.interface";
-import logger from "./logger";
+import logger from "./util/logger";
 import http_status_code from "http-status-codes";
 import config from "./config/config";
 import ApiError from "./util/api.error";
@@ -24,7 +24,7 @@ class App {
 		this.errorHandler();
 	}
 
-	dbConnection = async () => {
+	private async dbConnection() {
 		try {
 			const url: string = config.mongodb.url!;
 			await mongoose.connect(
@@ -43,7 +43,7 @@ class App {
 		} catch (error) {
 			logger.error((error as Error).message);
 		}
-	};
+	}
 
 	private middlewares(middleWares: {
 		forEach: (arg0: (middleWare: any) => void) => void;
